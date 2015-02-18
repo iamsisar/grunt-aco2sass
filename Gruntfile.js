@@ -1,5 +1,7 @@
 /*
- * grunt-aco2less
+ * grunt-aco2sass
+ * https://github.com/iamsisar/grunt-aco2sass
+ * Porting of grunt-aco2less
  * https://github.com/teemualap/grunt-aco2less
  *
  * Copyright (c) 2013 Teemu Alapoikela
@@ -33,7 +35,7 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          'tmp/test.less': ['test/fixtures/*.aco']
+          'tmp/test.scss': ['test/fixtures/*.aco']
         }
       }
     }
@@ -48,6 +50,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'aco2less']);
+  grunt.registerTask('default', ['jshint', 'aco2sass']);
 
 };
