@@ -156,7 +156,7 @@ module.exports = function(grunt) {
           lastNamesLength = lastNamesLength + (color.lenplus1 * 2);
 
           //write color name to the palette
-          palette += ("@"+ color.name + ": ");
+          palette += ("$"+ color.name + ": ");
 
           //calculate color values and write them to the palette
           if (color.colorSpace === 0) {
