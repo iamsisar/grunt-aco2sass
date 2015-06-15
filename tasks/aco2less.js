@@ -13,7 +13,7 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('aco2less', 'A grunt plugin used to create .less variables out of .aco files.', function() {
+  grunt.registerMultiTask('aco2sass', 'A grunt plugin used to create .less variables out of .aco files.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       separator: '\n',
