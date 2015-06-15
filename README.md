@@ -1,6 +1,6 @@
-# grunt-aco2less
+# grunt-aco2sass
 
-> A grunt plugin for creating .less variables out of .aco files. Currently supports rgb and hsb(->hsv) colors.
+> A grunt plugin for creating .sass variables out of .aco files. Currently supports rgb and hsb(->hsv) colors.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -8,23 +8,23 @@ This plugin requires Grunt `~0.4.1`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-aco2less --save-dev
+npm install git+https://github.com/iamsisar/grunt-aco2sass.git --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-aco2less');
+grunt.loadNpmTasks('grunt-aco2sass');
 ```
 
-## The "aco2less" task
+## The "aco2sass" task
 
 ### Overview
-In your project's Gruntfile, add a section named `aco2less` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `aco2sass` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  aco2less: {
+  aco2sass: {
     options: {
       // Task-specific options go here.
     },
@@ -41,26 +41,32 @@ grunt.initConfig({
 Type: `String`
 Default value: `undefined`
 
-Used to override the color names in .aco files. aco2less appends color numbers automatically: my-color-name-1, my-color-name-2 etc.
+Used to override the color names in .aco files. aco2sass appends color numbers automatically: my-color-name-1, my-color-name-2 etc.
+
+#### options.notation
+Type: `String`
+Default value: `rgb`
+
+If set to `hex`, hex values will be used.
 
 
 ### Usage Examples
 
 ```js
 grunt.initConfig({
-  aco2less: {
+  aco2sass: {
     options: {
       nameOverride: "my-color-name"
     },
-    files: {
-      'dest/my_less_file.less': ['my_aco_name.aco', 'path_to_my_acos/*.aco'],
+    main_palette: {
+      files: {
+        'dest/my_sass_file.sass': ['my_aco_name.aco', 'path_to_my_acos/*.aco'],
+      }
     }
   }
 })
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-0.0.1
+0.0.2
