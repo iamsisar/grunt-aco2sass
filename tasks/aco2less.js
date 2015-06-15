@@ -1,8 +1,10 @@
 /*
- * grunt-aco2less
+ * grunt-aco2sass
+ * https://github.com/iamsisar/grunt-aco2sass
+ *
+ * Sass porting of grunt-aco2less by @teemualap
  * https://github.com/teemualap/grunt-aco2less
  *
- * Copyright (c) 2013 Teemu Alapoikela
  * Licensed under the MIT license.
  */
 
@@ -44,13 +46,13 @@ module.exports = function(grunt) {
 
         //read buffer
         var buf = fs.readFileSync(filepath);
-        
+
         //aco1 header information mainly to get color count
         var header = binary.parse(buf)
           .word16be('ver')
           .word16be('nColors')
           .vars;
-        
+
         var skipOneHeader = 4;
 
         //skip aco1 section
@@ -89,7 +91,7 @@ module.exports = function(grunt) {
               }
               //give these colors an index number for later use
               color.index = colorCount-1;
-              
+
               //skip to the next color
               this.skip(( (vars.lenplus1) * 2));
             }
@@ -122,14 +124,14 @@ module.exports = function(grunt) {
 
           return colorName;
         }
-        
+
         var palette = "";
 
         function hexToAscii(hex) {
           var ascii = "";
           for (var i = 0; i < hex.length; i += 2) {
             ascii += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-          }  
+          }
           return ascii;
         }
 
@@ -161,13 +163,17 @@ module.exports = function(grunt) {
           //calculate color values and write them to the palette
           if (color.colorSpace === 0) {
             //RGB
-            color.w = color.w/256;
-            color.x = color.x/256;
-            color.y = color.y/256;
+            color.w = parseInt(color.w/256);
+            color.x = parseInt(color.x/256);
+            color.y = parseInt(color.y/256);
 
-            palette += "rgb("+color.w+","+color.x+","+color.y+");\n";
+            if( options.notation == 'hex' ){
+              palette += "\t#"+color.w.toString(16)+color.x.toString(16)+color.y.toString(16)+";\n";
+            } else {
+              palette += "\trgb("+color.w+","+color.x+","+color.y+");\n";
+            }
 
-          } 
+          }
           if (color.colorSpace === 1) {
             //HSB
             color.w = color.w/182.04;
@@ -176,7 +182,7 @@ module.exports = function(grunt) {
 
             palette += "hsv("+color.w+","+color.x+"%,"+color.y+"%);\n";
           }
-          
+
         }
 
         nFiles++;
